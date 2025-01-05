@@ -1,0 +1,85 @@
+{% extends "books/registration/dashboard_base.html" %}
+
+{% block title %}CHD Risk Prediction{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">CHD Risk Prediction</h2>
+    <form id="predictionForm" method="post" novalidate>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div id="error-summary" class="alert alert-danger d-none" role="alert">
+            Please correct the errors below.
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Predict</button>
+    </form>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const form = document.getElementById("predictionForm");
+        const errorSummary = document.getElementById("error-summary");
+
+        form.addEventListener("input", (e) => {
+            const field = e.target;
+            validateField(field);
+        });
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault(); // Prevent form submission if there are errors
+            const errors = Array.from(form.elements).filter((field) => {
+                return !validateField(field);
+            });
+
+            if (errors.length > 0) {
+                errorSummary.classList.remove("d-none");
+                return false;
+            } else {
+                errorSummary.classList.add("d-none");
+                form.submit(); // Proceed with form submission
+            }
+        });
+
+        function validateField(field) {
+            const errorField = field.nextElementSibling; // Get the error message span
+            let isValid = true;
+
+            if (field.required && !field.value) {
+                isValid = false;
+                displayError(field, "This field is required.");
+            } else if (field.type === "number") {
+                const min = parseFloat(field.min);
+                const max = parseFloat(field.max);
+                const value = parseFloat(field.value);
+                if (isNaN(value) || value < min || value > max) {
+                    isValid = false;
+                    displayError(field, `Value must be between ${min} and ${max}.`);
+                }
+            } else {
+                clearError(field);
+            }
+
+            return isValid;
+        }
+
+        function displayError(field, message) {
+            field.classList.add("is-invalid");
+            let errorFeedback = field.nextElementSibling;
+            if (!errorFeedback || !errorFeedback.classList.contains("invalid-feedback")) {
+                errorFeedback = document.createElement("div");
+                errorFeedback.className = "invalid-feedback";
+                field.parentNode.appendChild(errorFeedback);
+            }
+            errorFeedback.textContent = message;
+        }
+
+        function clearError(field) {
+            field.classList.remove("is-invalid");
+            let errorFeedback = field.nextElementSibling;
+            if (errorFeedback && errorFeedback.classList.contains("invalid-feedback")) {
+                errorFeedback.remove();
+            }
+        }
+    });
+</script>
+{% endblock %}

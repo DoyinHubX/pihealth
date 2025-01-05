@@ -1,0 +1,20 @@
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<h2>Register</h2>
+<form method="post">
+    {% csrf_token %}
+    {% for field in form %}
+        <div class="form-group mb-4">
+            <!-- Custom label for each field -->
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            <!-- Render the field with Bootstrap classes -->
+            {{ field }} <!-- This will render the field with the 'form-control' class -->
+            {% if field.errors %}
+                <div class="text-danger">{{ field.errors|join:", " }}</div>
+            {% endif %}
+        </div>
+    {% endfor %}
+    <button type="submit" class="btn btn-primary">Register</button>
+</form>
+{% endblock %}

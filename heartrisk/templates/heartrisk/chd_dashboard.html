@@ -1,0 +1,96 @@
+{% extends "books/registration/dashboard_base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+         <!-- Value Boxes with Icons on the Right -->
+<div class="row">
+    <div class="col-md-3">
+        <div class="card value-box bg-light-blue">
+            <div class="card-body d-flex justify-content-between align-items-center">
+                <div>
+                    <h5 class="card-title">Total Records</h5>
+                    <p class="card-text">{{ total_records }}</p>
+                </div>
+                <div class="icon-column">
+                    <i class="fas fa-database fa-2x"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card value-box bg-light-green">
+            <div class="card-body d-flex justify-content-between align-items-center">
+                <div>
+                    <h5 class="card-title">Average Age</h5>
+                    <p class="card-text">{{ avg_age|default:"N/A" }}</p>
+                </div>
+                <div class="icon-column">
+                    <i class="fas fa-user-clock fa-2x"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card value-box bg-light-yellow">
+            <div class="card-body d-flex justify-content-between align-items-center">
+                <div>
+                    <h5 class="card-title">Cholesterol</h5>
+                    <p class="card-text">
+                        Total: {{ mean_tot_chol|default:"N/A" }}<br>
+                        <!-- HDL: {{ mean_hdl_chol|default:"N/A" }}<br>
+                        LDL: {{ mean_ldl_chol|default:"N/A" }} -->
+                    </p>
+                </div>
+                <div class="icon-column">
+                    <i class="fas fa-vial fa-2x"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card value-box bg-light-orange">
+            <div class="card-body d-flex justify-content-between align-items-center">
+                <div>
+                    <h5 class="card-title">Average BP</h5>
+                    <p class="card-text custom-small-text">
+                        Sys: {{ avg_systolic_bp|default:"N/A" }}  
+                        <!-- Dias: {{ avg_diastolic_bp|default:"N/A" }} -->
+                    </p>
+                </div>
+                <div class="icon-column">
+                    <i class="fas fa-heartbeat fa-2x"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+
+<hr>
+
+    <!-- Charts -->
+     <div class="row mt-4">
+        <div class="col-md-7">
+            <img src="data:image/png;base64,{{ charts.correlation_heatmap }}" class="img-fluid" />
+        </div>
+        
+        <div class="col-md-5">
+          <!--  <h5>BMI Distribution</h5> -->
+            <img src="data:image/png;base64,{{ charts.bmi_distribution }}" class="img-fluid" />
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-6">
+         <!--   <h5>Smoking Status by Risk Level</h5> -->
+            <img src="data:image/png;base64,{{ charts.smoking_status }}" class="img-fluid" />
+        </div>
+        <div class="col-md-6">
+           <!-- <h5>Age Distribution</h5> -->
+            <img src="data:image/png;base64,{{ charts.age_distribution }}" class="img-fluid" />
+        </div>
+        
+    </div>
+   
+</div>
+{% endblock %}

@@ -1,0 +1,137 @@
+
+{% extends "books/registration/dashboard_base.html" %}
+
+{% block title %}Prediction Result{% endblock %}
+
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="bg-light p-4 rounded shadow-sm text-center">
+        <h2 class="mb-4">Prediction Result</h2>
+        <p class="lead d-flex align-items-center justify-content-center">
+        Your CHD Risk is:  <strong style="color: blue;">{{ result }}</strong>
+        <!-- Add Curvy Arrow Image 
+        <img src="{% static 'images/curvy-arrow.png' %}" alt="chart-arrow" style="height: 40px; margin-left: 15px;">
+        </p>
+        <p class="text-center" style="margin-top: -10px;">View your risk factor chart below</p> -->
+
+        {% if risk_level == "At Risk" %}
+            <h4 class="mt-4 measure-alignment">Recommended Measures:</h4><hr>
+            <ul class="recommendations-list">
+                <li>Consult your healthcare provider for regular heart check-ups.</li>
+                <li>Engage in physical activities, such as walking or jogging, to improve cardiovascular health.</li>
+                <li>Reduce salt intake and focus on a heart-healthy diet (low in saturated fats and cholesterol).</li>
+                <li>Consider quitting smoking and limit alcohol consumption.</li>
+                <li>Manage stress through relaxation techniques like yoga, meditation, or deep breathing exercises.</li>
+                <li>Monitor blood pressure, cholesterol levels, and glucose regularly.</li>
+            </ul>
+        {% elif risk_level == "Not At Risk" %}
+            <h4 class="mt-4 measure-alignment">Maintain a Healthy Lifestyle:</h4><hr>
+            <ul class="recommendations-list">
+                <li>Continue with regular exercise to keep your heart healthy.</li>
+                <li>Eat a balanced diet rich in fruits, vegetables, and whole grains.</li>
+                <li>Maintain a healthy weight and avoid excessive alcohol consumption.</li>
+                <li>Monitor your blood pressure and cholesterol levels at regular intervals.</li>
+                <li>Get adequate sleep and manage stress effectively.</li>
+            </ul>
+        {% else %}
+            <p>No risk level available. Please contact your healthcare provider for further evaluation.</p>
+        {% endif %}
+        
+        <div class="mt-4">
+            <a href="{% url 'predict_risk' %}" class="btn btn-primary btn-lg">Predict Again</a>
+        </div>
+    </div>
+
+<!-- Radar Chart Section -->
+<div class="mt-5 bg-light p-4 rounded shadow-sm d-flex align-items-center">
+    <!-- Chart Area (Wider Column) -->
+    <div class="chart-container" style="position: relative; height: 120vh; width: 65%;">
+        <canvas id="riskRadarChart"></canvas>
+    </div>
+    
+    <!-- Explanation Area (Narrower Column) -->
+    <div class="ml-4" style="max-width: 30%; text-align: left;">
+        <h4>Chart Explanation</h4>
+        <p>
+            The radar chart above visualizes the various risk factors contributing to your 
+            cardiovascular health risk. Each spoke represents a different factor, including age, cholesterol levels, blood pressure, BMI, and more. 
+            The further out the point is along each spoke, the higher the risk factor for that parameter. 
+            A higher value in the chart suggests a greater contribution to your overall heart disease risk.
+        </p>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const riskFactors = {
+        {% for key, value in risk_factors.items %}
+        "{{ key }}": {{ value|default:0|floatformat:2 }},
+        {% endfor %}
+    };
+
+    const ctx = document.getElementById('riskRadarChart').getContext('2d');
+
+    new Chart(ctx, {
+        type: 'radar',
+        data: {
+            labels: Object.keys(riskFactors),
+            datasets: [{
+                label: 'Risk Factors',
+                data: Object.values(riskFactors),
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1,
+            }]
+        },
+        options: {
+            layout: {
+                padding: 2,
+            },
+            plugins: {
+                legend: {
+                    labels: {
+                        font: {
+                            size: 16,
+                        }
+                    }
+                }
+            },
+            scales: {
+                r: {
+                    pointLabels: {
+                        font: {
+                            size: 14,
+                        },
+                        //color: 'white',  // White color for point labels
+                    },
+                    ticks: {
+                        display: false
+                    },
+                    angleLines: {
+                        color: 'rgba(200, 200, 200, 0.5)'  
+                    },
+                    grid: {
+                        color: 'rgba(200, 200, 200, 0.5)' 
+                    }
+                }
+            }
+        }
+    });
+</script>
+
+<style>
+    .measure-alignment {
+        text-align: left;
+    }
+    .recommendations-list {
+        font-size: 14px;
+        text-align: left;
+        padding-left: 20px;
+    }
+    .recommendations-list li {
+        margin-bottom: 10px;
+    }
+</style>
+{% endblock %}

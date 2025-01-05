@@ -1,0 +1,14 @@
+{% extends "books/registration/dashboard_base.html" %}
+
+{% block title %}Bulk CHD Risk Prediction{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Bulk CHD Risk Prediction</h2><hr class="mb-4">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Upload and Predict</button>
+    </form>
+</div>
+{% endblock %}

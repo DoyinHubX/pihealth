@@ -1,0 +1,84 @@
+{% extends "books/registration/dashboard_base.html" %}
+{% load custom_filters %}
+
+{% block title %}Book Details{% endblock %}
+
+{% block content %}
+<div class="row">
+    <!-- Left Column for Cover Image -->
+    <div class="col-md-4">
+        {% if book.cover_image %}
+            <img src="{{ book.cover_image.url }}" class="img-thumbnail" alt="Cover Image">
+        {% endif %}
+    </div>
+
+    <!-- Right Column for Book Details -->
+    <div class="col-md-8">
+        <h2>{{ book.title }}</h2><hr>
+        <p><strong>Author:</strong> {{ book.author }}</p>
+        <p><strong>Genre:</strong> {{ book.genre }}</p>
+        <p><strong>ISBN:</strong> {{ book.isbn }}</p>
+        <p><strong>Published Date:</strong> {{ book.published_date }}</p>
+        <p>{{ book.summary }}</p>
+
+        {% if user.is_authenticated %}
+            <a href="{% url 'book-update' book.id %}" class="btn btn-warning">Edit</a>
+            <a href="{% url 'book-delete' book.id %}" class="btn btn-danger">Delete</a>
+        {% endif %}
+
+        <hr>
+
+        <!-- Reviews Section -->
+        <h3>Reviews</h3>
+        {% if book.reviews.count > 0 %}
+            <ul class="list-group">
+                {% for review in book.reviews.all %}
+                    <li class="list-group-item">
+                        <div class="d-flex justify-content-between">
+                            <strong>{{ review.user.username }}</strong>
+                            <span class="text-warning">{{ review.rating|stars }}</span>
+                        </div>
+                        <p>{{ review.comment }}</p>
+                        <small class="text-muted">Reviewed on: {{ review.created_at|date:"Y-m-d H:i" }}</small>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No reviews yet. Be the first to review this book!</p>
+        {% endif %}
+
+        {% if user.is_authenticated %}
+    <h4>Submit Your Review</h4>
+    <form method="post" action="{% url 'review-create' pk=book.id %}" class="mt-3">
+        {% csrf_token %}
+        <div class="form-group mb-3">
+            <label for="id_rating" class="form-label"><strong>Rating:</strong></label><br>
+            {% for value, label in review_form.fields.rating.choices %}
+                <div class="form-check form-check-inline">
+                    <input 
+                        type="radio" 
+                        name="rating" 
+                        id="id_rating_{{ forloop.counter }}" 
+                        value="{{ value }}" 
+                        class="form-check-input" 
+                        {% if review_form.rating.value == value %}checked{% endif %}
+                    >
+                    <label class="form-check-label" for="id_rating_{{ forloop.counter }}">{{ label }}</label>
+                </div>
+            {% endfor %}
+        </div>
+        
+        <div class="form-group mb-3">
+            <label for="id_comment" class="form-label"><strong>Comment:</strong></label>
+            {{ review_form.comment }}
+        </div>
+        
+        <button type="submit" class="btn btn-primary mt-2">Submit Review</button>
+    </form>
+{% else %}
+    <p>You must <a href="{% url 'login' %}" class="btn btn-link">log in</a> to submit a review.</p>
+{% endif %}
+
+    </div>
+</div>
+{% endblock %}

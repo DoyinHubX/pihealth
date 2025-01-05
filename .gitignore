@@ -1,0 +1,59 @@
+# Byte-compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+.venv/
+
+# Environment variables
+.env
+
+# Django specific
+db.sqlite3
+*.sqlite3
+staticfiles/
+media/
+*.log
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+*.bak
+
+# Test and coverage reports
+.coverage
+htmlcov/
+*.cover
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Node.js (if using for frontend or other purposes)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# macOS specific
+.DS_Store
+
+# Windows specific
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Ignore .ipynb files (Jupyter Notebooks)
+*.ipynb
+
+# Ignore .ipynb_checkpoints folders and files
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+
+# Ignore all .csv files
+*.csv

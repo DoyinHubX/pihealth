@@ -1,0 +1,13 @@
+{% extends "books/registration/dashboard_base.html" %}
+
+{% block title %}Error{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center text-danger">Error Occurred</h2>
+    <div class="alert alert-danger" role="alert">
+        <strong>Error:</strong> {{ error }}
+    </div>
+    <a href="{% url 'bulk_prediction' %}" class="btn btn-secondary mt-3">Go Back and Try Again</a>
+</div>
+{% endblock %}

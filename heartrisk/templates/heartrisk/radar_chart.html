@@ -1,0 +1,23 @@
+{% extends "books/registration/dashboard_base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Risk Factors for Patient {{ patient.id }}</h2><hr>
+    <div class="row">
+        <div class="col-md-3">
+            <h5>Patient Details</h5>
+            <ul>
+                <li><strong>Age:</strong> {{ patient.age }}</li>
+                <li><strong>Total Cholesterol:</strong> {{ patient.tot_chol }}</li>
+                <li><strong>Systolic BP:</strong> {{ patient.sys_bp }}</li>
+                <li><strong>Diastolic BP:</strong> {{ patient.dia_bp }}</li>
+                <li><strong>Smoking Status:</strong> {{ patient.current_smoker|yesno:"Yes,No" }}</li>
+                <li><strong>BMI:</strong> {{ patient.bmi }}</li>
+            </ul>
+        </div>
+        <div class="col-md-9">
+            <img src="data:image/png;base64,{{ chart_base64 }}" class="img-fluid" />
+        </div>
+    </div>
+</div>
+{% endblock %}

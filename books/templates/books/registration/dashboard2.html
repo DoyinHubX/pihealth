@@ -1,0 +1,74 @@
+{% extends "books/registration/dashboard_base.html" %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+<h3>Welcome, {{ user.username }}!</h3>
+                <p>This is your dashboard. Here, you can manage your account, view books, or perform other actions.</p>
+
+                <!-- Dashboard Cards -->
+                <div class="row my-4">
+                    <div class="col-md-3">
+                        <div class="card text-white bg-primary mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Earnings (Monthly)</h5>
+                                <h3>$40,000</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card text-white bg-success mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Earnings (Annual)</h5>
+                                <h3>$215,000</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card text-white bg-info mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Tasks</h5>
+                                <h3>50%</h3>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card text-white bg-warning mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Pending Requests</h5>
+                                <h3>18</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Section -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Earnings Overview</h5>
+                                <!-- Insert Chart Here -->
+                                <canvas id="earningsChart" height="150"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Revenue Sources</h5>
+                                <!-- Insert Chart Here -->
+                                <canvas id="revenueChart" height="150"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    
+{% endblock %}

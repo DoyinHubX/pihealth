@@ -1,0 +1,143 @@
+{% extends "books/registration/dashboard_base.html" %}
+
+{% block title %} CHD Record Form {% endblock %}
+
+{% block content %}
+<div class="form-container d-flex align-items-center justify-content-center" style="min-height: 100vh; background: linear-gradient(135deg, #6a11cb, #2575fc);">
+    <div class="card shadow-lg" style="width: 900px; border-radius: 15px; overflow: hidden;">
+        <div class="card-header text-center bg-primary text-white py-3">
+            <h3>{{ title }}</h3>
+        </div>
+        <div class="card-body p-4">
+            <form method="POST" enctype="multipart/form-data" class="row g-4">
+                {% csrf_token %}
+                
+                <!-- Left Column -->
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="male" class="form-label">Male</label>
+                        {{ form.male }}
+                        {% if form.male.errors %}
+                        <div class="text-danger">{{ form.male.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        <label for="age" class="form-label">Age</label>
+                        <input type="number" name="age" id="age" class="form-control" value="{{ form.age.value|default_if_none:'' }}">
+                        {% if form.age.errors %}
+                        <div class="text-danger">{{ form.age.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        <label for="education" class="form-label">Education</label>
+                        {{ form.education }}
+                        {% if form.education.errors %}
+                        <div class="text-danger">{{ form.education.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        <label for="current_smoker" class="form-label">Current Smoker</label>
+                        {{ form.current_smoker }}
+                        {% if form.current_smoker.errors %}
+                        <div class="text-danger">{{ form.current_smoker.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        <label for="cigs_per_day" class="form-label">Cigarettes Per Day</label>
+                        <input type="number" name="cigs_per_day" id="cigs_per_day" class="form-control" value="{{ form.cigs_per_day.value|default_if_none:'' }}">
+                        {% if form.cigs_per_day.errors %}
+                        <div class="text-danger">{{ form.cigs_per_day.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        <label for="bp_meds" class="form-label">BP Medication</label>
+                        {{ form.bp_meds }}
+                        {% if form.bp_meds.errors %}
+                        <div class="text-danger">{{ form.bp_meds.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        <label for="prevalent_stroke" class="form-label">Prevalent Stroke</label>
+                        {{ form.prevalent_stroke }}
+                        {% if form.prevalent_stroke.errors %}
+                        <div class="text-danger">{{ form.prevalent_stroke.errors }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="prevalent_hyp" class="form-label">Prevalent Hypertension</label>
+                        {{ form.prevalent_hyp }}
+                        {% if form.prevalent_hyp.errors %}
+                        <div class="text-danger">{{ form.prevalent_hyp.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        <label for="diabetes" class="form-label">Diabetes</label>
+                        {{ form.diabetes }}
+                        {% if form.diabetes.errors %}
+                        <div class="text-danger">{{ form.diabetes.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        <label for="tot_chol" class="form-label">Total Cholesterol</label>
+                        <input type="number" name="tot_chol" id="tot_chol" class="form-control" value="{{ form.tot_chol.value|default_if_none:'' }}">
+                        {% if form.tot_chol.errors %}
+                        <div class="text-danger">{{ form.tot_chol.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        <label for="sys_bp" class="form-label">Systolic BP</label>
+                        <input type="number" name="sys_bp" id="sys_bp" class="form-control" value="{{ form.sys_bp.value|default_if_none:'' }}">
+                        {% if form.sys_bp.errors %}
+                        <div class="text-danger">{{ form.sys_bp.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        <label for="dia_bp" class="form-label">Diastolic BP</label>
+                        <input type="number" name="dia_bp" id="dia_bp" class="form-control" value="{{ form.dia_bp.value|default_if_none:'' }}">
+                        {% if form.dia_bp.errors %}
+                        <div class="text-danger">{{ form.dia_bp.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        <label for="bmi" class="form-label">BMI</label>
+                        <input type="number" step="0.01" name="bmi" id="bmi" class="form-control" value="{{ form.bmi.value|default_if_none:'' }}">
+                        {% if form.bmi.errors %}
+                        <div class="text-danger">{{ form.bmi.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        <label for="heart_rate" class="form-label">Heart Rate</label>
+                        <input type="number" name="heart_rate" id="heart_rate" class="form-control" value="{{ form.heart_rate.value|default_if_none:'' }}">
+                        {% if form.heart_rate.errors %}
+                        <div class="text-danger">{{ form.heart_rate.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        <label for="glucose" class="form-label">Glucose</label>
+                        <input type="number" name="glucose" id="glucose" class="form-control" value="{{ form.glucose.value|default_if_none:'' }}">
+                        {% if form.glucose.errors %}
+                        <div class="text-danger">{{ form.glucose.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        <label for="risk_level" class="form-label">Risk Level</label>
+                        {{ form.risk_level }}
+                        {% if form.risk_level.errors %}
+                        <div class="text-danger">{{ form.risk_level.errors }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="col-12 text-center">
+                    <button type="submit" class="btn btn-primary btn-lg px-4">Save Record</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
