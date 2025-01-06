@@ -103,7 +103,7 @@ WSGI_APPLICATION = "o10_book_crudauth.wsgi.application"
 DATABASES = {
     'default': dj_database_url.config(
         # Replace this value with your local database's connection string.
-        default='postgresql://postgres:postgres@localhost:5432/pihealth',
+        default='postgres://ngvmhgra:3dP2vWmYpZcA2-kf3iEOqu6UAhu7ij29@kandula.db.elephantsql.com:5432/ngvmhgra',
         conn_max_age=600
     )
 }
@@ -111,7 +111,7 @@ DATABASES = {
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
 
-#postgres://ngvmhgra:3dP2vWmYpZcA2-kf3iEOqu6UAhu7ij29@kandula.db.elephantsql.com/ngvmhgra
+postgres://ngvmhgra:3dP2vWmYpZcA2-kf3iEOqu6UAhu7ij29@kandula.db.elephantsql.com/ngvmhgra
 
 AUTH_PASSWORD_VALIDATORS = [
     {

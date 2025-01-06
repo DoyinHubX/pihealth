@@ -1,0 +1,1 @@
+web: gunicorn o10_book_crudauth.wsgi:application
