@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['https://pihealth.onrender.com', 'localhost', '127.0.0.1']
 
 SECRET_KEY = "django-insecure-s*hg*lxwx#udzcp%trlvg7q%$ehr%a=mggx)+lb91=39=rj@o_"
 
@@ -99,19 +99,19 @@ WSGI_APPLICATION = "o10_book_crudauth.wsgi.application"
 # }
 
 
-# Replace the SQLite DATABASES configuration with PostgreSQL:
 DATABASES = {
     'default': dj_database_url.config(
-        # Replace this value with your local database's connection string.
         default=os.getenv('DATABASE_URL'),
-        conn_max_age=600
+        conn_max_age=600,
     )
 }
+
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
 
-postgres://ngvmhgra:3dP2vWmYpZcA2-kf3iEOqu6UAhu7ij29@kandula.db.elephantsql.com/ngvmhgra
+#postgres://ngvmhgra:3dP2vWmYpZcA2-kf3iEOqu6UAhu7ij29@kandula.db.elephantsql.com/ngvmhgra
+#postgres://ngvmhgra:3dP2vWmYpZcA2-kf3iEOqu6UAhu7ij29@kandula.db.elephantsql.com.oregon-postgres.render.com/ngvmhgra
 
 AUTH_PASSWORD_VALIDATORS = [
     {
