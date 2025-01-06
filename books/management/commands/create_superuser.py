@@ -9,8 +9,7 @@ class Command(BaseCommand):
             CustomUser.objects.create_superuser(
                 username='intelliport',
                 email='intelliport@gmail.com',
-                password1='intelliport',
-                password2='intelliport'
+                password='intelliport'
             )
             self.stdout.write(self.style.SUCCESS('Superuser created successfully'))
         else:
