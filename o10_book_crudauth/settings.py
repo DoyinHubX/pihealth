@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://pihealth.onrender.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['pihealth-pwx6.onrender.com', 'localhost', '127.0.0.1']
 
 SECRET_KEY = "django-insecure-s*hg*lxwx#udzcp%trlvg7q%$ehr%a=mggx)+lb91=39=rj@o_"
 
