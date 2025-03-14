@@ -76,6 +76,7 @@ class CustomLoginView(LoginView):
 
 
 class RegisterView(TemplateView):
+    form_class = CustomUserCreationForm
     template_name = 'books/registration/register.html'
 
     def post(self, request, *args, **kwargs):
